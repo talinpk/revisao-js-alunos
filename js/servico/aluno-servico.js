@@ -8,7 +8,7 @@ class AlunoServico {
         if (aluno.idade >= 18) {
             return this.repositorio.inserir(aluno);
         }
-        // é menor de idade. Deveria devolver erro
+        // é menor de idade. Deveria devolver erro1
         return undefined;
     }
 
