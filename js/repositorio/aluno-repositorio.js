@@ -3,7 +3,7 @@ class AlunoRepositorio {
         this._alunos = [];
     }
 
-    inserir(aluno) {
+    inserir(aluno)  {
         this._alunos.push(aluno);
         return aluno;
     }
