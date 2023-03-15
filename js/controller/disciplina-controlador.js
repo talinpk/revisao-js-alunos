@@ -1,20 +1,21 @@
 class DisciplinaControlador {
     constructor() {
-        this.disciplinaServico = new DisciplinaServico();
-        this.botaoInserir = document.querySelector("#botao-inserir");
-        this.botaoInserir.addEventListener("click", () => this.inserir());
+        this.servico = new DisciplinaServico();
+        this.nomeInput = document.querySelector("#nome");
+        this.codigoInput = document.querySelector("#codigo");
     }
 
     inserir() {
-        const nomeDisciplina = document.querySelector("#nome").value;
-        const codigoDisciplina = Number(document.querySelector("#codigo").value);
-        const disciplina = this.disciplinaServico.inserir(codigoDisciplina, nomeDisciplina);
+        const nome = this.nomeInput.value;
+        const codigo = Number(this.codigoInput.value);
+        const disciplina = this.servico.inserir(codigo, nome);
 
         if (disciplina) {
-            this.mostrarDisciplinaNoHTML(nomeDisciplina, codigoDisciplina);
-            alert("Disciplina inserida com sucesso!");
-        } else {
-            alert("Código já existente não permitido!");
+            this.mostrarDisciplinaNoHTML(nome, codigo);
+            alert('Disciplina adicionada!');
+        } 
+        else {
+            alert('já existente, código não aceito!')
         }
     }
 
@@ -24,16 +25,18 @@ class DisciplinaControlador {
 
         const elementoBotaoApagar = document.createElement("button");
         elementoBotaoApagar.textContent = "X";
-        elementoBotaoApagar.addEventListener("click", () => {
-            this.removerDisciplinaDaLista(codigo);
-            elementoP.remove();
-        });
 
+        elementoBotaoApagar.addEventListener('click', (event) => {
+                this.removerDisciplinaDaLista(codigo);
+                event.target.parentElement.remove();
+            }
+        );
         elementoP.appendChild(elementoBotaoApagar);
         document.body.appendChild(elementoP);
     }
 
     removerDisciplinaDaLista(codigo) {
-        this.disciplinaServico.remover(codigo);
+        this.servico.remover(codigo);
     }
+
 }
